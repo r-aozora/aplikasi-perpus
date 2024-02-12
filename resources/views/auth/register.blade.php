@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label for="alamat">Alamat</label>
-                    <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="10" required>{{ old('alamat') }}</textarea>
+                    <textarea class="form-control" name="alamat" id="alamat" style="height: 100px" required>{{ old('alamat') }}</textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -55,5 +55,8 @@
                 </div>
             </form>
         </div>
+    </div>
+    <div class="mt-5 text-muted text-center">
+        Sudah punya akun? <a href="{{ route('login') }}">Masuk</a>.
     </div>
 @endsection
