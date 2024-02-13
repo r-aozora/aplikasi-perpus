@@ -6,7 +6,6 @@ namespace Database\Seeders;
 
 use App\Models\Buku;
 use App\Models\Kategori;
-use App\Models\KategoriBuku;
 use App\Models\Ulasan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -56,10 +55,10 @@ class DatabaseSeeder extends Seeder
         Kategori::insert([
             [
                 'kategori' => 'Light Novel',
-                'slug'     => 'light-novel',
+                // 'slug'     => 'light-novel',
             ], [
                 'kategori' => 'Non Fiksi',
-                'slug'     => 'non-fiksi',
+                // 'slug'     => 'non-fiksi',
             ]
         ]);
 

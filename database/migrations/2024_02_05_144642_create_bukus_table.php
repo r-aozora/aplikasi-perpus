@@ -14,9 +14,6 @@ return new class extends Migration
         Schema::create('kategori', function (Blueprint $table) {
             $table->id();
             $table->string('kategori');
-            $table->string('slug')
-                ->nullable()
-                ->unique();
             $table->timestamps();
         });
 
@@ -34,6 +31,7 @@ return new class extends Migration
                 ->nullable()
                 ->default('/images/buku.png');
             $table->unsignedBigInteger('stok');
+            // $table->unsignedBigInteger('jumlah_pinjam');
             $table->unsignedBigInteger('kategori_id');
             $table->foreign('kategori_id')
                 ->references('id')
