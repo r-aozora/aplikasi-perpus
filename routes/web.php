@@ -51,7 +51,10 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('role:pembaca')->group(function () {
         Route::prefix('dashboard')->group(function () {
-            Route::resource('pustaka', PustakaController::class);
+            Route::get('pustaka', [PustakaController::class, 'index'])
+                ->name('pustaka.index');
+            Route::get('pustaka/{buku}', [PustakaController::class, 'show'])
+                ->name('pustaka.show');
 
             Route::resource('koleksi', KoleksiController::class);
         });

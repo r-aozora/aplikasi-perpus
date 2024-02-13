@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Koleksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PustakaController extends Controller
 {
@@ -12,7 +14,18 @@ class PustakaController extends Controller
      */
     public function index(Request $request)
     {
+        $search = $request->input('search');
+
         $buku = Buku::with('kategori')
+            ->when(strlen($search), function ($query) use ($search) {
+                return $query->where('judul', 'like', "%$search%")
+                    ->orWhere('penulis', 'like', "%$search%")
+                    ->orWhere('penerbit', 'like', "%$search%")
+                    ->orWhere('tahun_terbit', 'like', "%$search%")
+                    ->orWhereHas('kategori', function ($query) use ($search) {
+                        $query->where('kategori', 'like', "%$search%");
+                    });
+            })
             ->withAvg('ulasan', 'rating')
             ->where('stok', '!=', 0)
             ->orderBy('judul')
@@ -27,55 +40,23 @@ class PustakaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Buku $buku)
     {
+        $buku->load(['kategori', 'ulasan', 'ulasan.user'])
+            ->withAvg('ulasan', 'rating');
+
+        $koleksi = Koleksi::where('user_id', Auth::user()->id)
+            ->where('buku_id', $buku->id)
+            ->exists();
+
         return view('dashboard.pustaka.show')
             ->with([
-                'title'  => $buku->judul,
-                'active' => 'Pustaka',
-                'buku'   => $buku,
+                'title'   => $buku->judul,
+                'active'  => 'Pustaka',
+                'buku'    => $buku,
+                'koleksi' => $koleksi,
             ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Buku $buku)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Buku $buku)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Buku $buku)
-    {
-        //
     }
 }
