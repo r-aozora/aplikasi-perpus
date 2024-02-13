@@ -14,10 +14,12 @@ class KoleksiController extends Controller
     {
         $user = $request->input('user');
 
-        $koleksi = Koleksi::with('buku')
+        $koleksi = Koleksi::with(['buku', 'buku.kategori'])
             ->where('user_id', $user)
             ->latest()
             ->get();
+
+        confirmDelete('Hapus Koleksi?', 'Anda yakin ingin hapus Buku dari Koleksi?');
 
         return view('dashboard.koleksi.index')
             ->with([
@@ -25,14 +27,6 @@ class KoleksiController extends Controller
                 'active' => 'Koleksi',
                 'koleksi' => $koleksi
             ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -53,30 +47,6 @@ class KoleksiController extends Controller
         toast('Berhasil ditambahkan ke Koleksi!', 'success');
 
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Koleksi $koleksi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Koleksi $koleksi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Koleksi $koleksi)
-    {
-        //
     }
 
     /**

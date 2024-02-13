@@ -17,10 +17,23 @@
                 </div>
             </div>
             <div class="section-body">
-                <h2 class="section-title">{{ $title }}</h2>
-                <p class="section-lead">
-                    Cari buku yang ingin kamu pinjam!
-                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="section-title mt-0">Cari Buku</div>
+                                <form action="{{ route('pustaka.index') }}" method="GET">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="search" placeholder="Cari buku..." value="{{ request('search') }}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">Cari</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     @foreach ($buku as $item)
                         <div class="col-12 col-md-4 col-lg-4">
@@ -37,7 +50,7 @@
                                         <a href="#">{{ number_format($item->ulasan_avg_rating, 1) }} / 5</a>
                                     </div>
                                     <div class="article-title">
-                                        <h2><a href="{{ $item->judul }}">{{ $item->judul }}</a></h2>
+                                        <h2><a href="{{ route('pustaka.show', $item->slug) }}">{{ $item->judul }}</a></h2>
                                     </div>
                                     <p>
                                         @if ($item->deskripsi > 100)

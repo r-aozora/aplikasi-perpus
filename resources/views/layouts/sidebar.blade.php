@@ -73,10 +73,13 @@
                     </a>
                 </li>
                 <li class="dropdown {{ $active === 'Koleksi' ? 'active' : '' }}">
-                    <a href="{{ route('koleksi.index') }}" class="nav-link">
-                        <i class="fas fa-bookmark"></i>
-                        <span>Koleksi Kamu</span>
-                    </a>
+                    <form action="{{ route('koleksi.index') }}" method="GET">
+                        <input type="hidden" name="user" value="{{ Auth::user()->id }}">
+                        <a href="{{ route('koleksi.index') }}" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">
+                            <i class="fas fa-bookmark"></i>
+                            <span>Koleksi Buku Kamu</span>
+                        </a>
+                    </form>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="nav-link">
