@@ -5,11 +5,15 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Buku;
+use App\Models\DetailPinjam;
 use App\Models\Kategori;
+use App\Models\Koleksi;
+use App\Models\Peminjaman;
 use App\Models\Ulasan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -55,10 +59,8 @@ class DatabaseSeeder extends Seeder
         Kategori::insert([
             [
                 'kategori' => 'Light Novel',
-                // 'slug'     => 'light-novel',
             ], [
                 'kategori' => 'Non Fiksi',
-                // 'slug'     => 'non-fiksi',
             ]
         ]);
 
@@ -68,19 +70,51 @@ class DatabaseSeeder extends Seeder
                 'slug'         => 'relay',
                 'penulis'      => 'Rain Aozora',
                 'penerbit'     => 'Aozora Project',
-                'tahun_terbit' => '2024',
+                'tahun_terbit' => '2018',
                 'deskripsi'    => 'Sebuah light novel misteri karya Rain Aozora.',
                 'stok'         => 3,
+                'stok_terkini' => 3,
                 'kategori_id'  => 1,
             ], [
                 'judul'        => 'Relay: Zero',
                 'slug'         => 'relay-zero',
                 'penulis'      => 'Rain Aozora',
                 'penerbit'     => 'Aozora Project',
-                'tahun_terbit' => '2025',
+                'tahun_terbit' => '2019',
                 'deskripsi'    => 'Cerita prekuel light novel karya Rain Aozora, Relay.',
                 'stok'         => 3,
+                'stok_terkini' => 3,
                 'kategori_id'  => 1,
+            ]
+        ]);
+
+        Koleksi::insert([
+            [
+                'user_id' => 3,
+                'buku_id' => 1,
+            ], [
+                'user_id' => 3,
+                'buku_id' => 2,
+            ]
+        ]);
+
+        Peminjaman::insert([
+            [
+                'invoice'    => 'INV-'.Str::random(10),
+                'user_id'    => 3,
+                'created_at' => now(),
+            ]
+        ]);
+
+        DetailPinjam::insert([
+            [
+                'pinjam_id' => 1,
+                'buku_id'   => 1,
+                'jumlah'    => 1,
+            ], [
+                'pinjam_id' => 1,
+                'buku_id'   => 2,
+                'jumlah'    => 1,
             ]
         ]);
 

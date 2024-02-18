@@ -30,8 +30,8 @@
                         <span>Kategori Buku</span>
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="nav-link">
+                <li class="dropdown {{ $active === 'Peminjaman' ? 'active' : '' }}">
+                    <a href="{{ route('peminjaman.index') }}" class="nav-link">
                         <i class="fas fa-clipboard-list"></i>
                         <span>Peminjaman</span>
                     </a>
@@ -69,32 +69,26 @@
                 <li class="dropdown {{ $active === 'Pustaka' ? 'active' : '' }}">
                     <a href="{{ route('pustaka.index') }}" class="nav-link">
                         <i class="fas fa-book"></i>
-                        <span>Pustaka Buku</span>
+                        <span>Pustaka</span>
                     </a>
                 </li>
                 <li class="dropdown {{ $active === 'Koleksi' ? 'active' : '' }}">
-                    <form action="{{ route('koleksi.index') }}" method="GET">
-                        <input type="hidden" name="user" value="{{ Auth::user()->id }}">
-                        <a href="{{ route('koleksi.index') }}" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">
-                            <i class="fas fa-bookmark"></i>
-                            <span>Koleksi Buku Kamu</span>
-                        </a>
-                    </form>
+                    <a href="{{ route('koleksi.index') }}" class="nav-link">
+                        <i class="fas fa-bookmark"></i>
+                        <span>Koleksi</span>
+                    </a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="nav-link">
+                <li class="dropdown {{ $active === 'Pinjam' ? 'active' : '' }}">
+                    <a href="{{ route('pinjam.index') }}" class="nav-link">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Peminjaman</span>
                     </a>
                 </li>
-                <li class="dropdown">
-                    <form action="{{ route('ulasan.index') }}" method="GET">
-                        <input type="hidden" name="user" value="{{ Auth::user()->id }}">
-                        <a href="{{ route('ulasan.index') }}" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">
-                            <i class="fas fa-comment"></i>
-                            <span>Ulasan Kamu</span>
-                        </a>
-                    </form>
+                <li class="dropdown {{ $active === 'Ulasan' ? 'active' : '' }}">
+                    <a href="{{ route('ulasan.index') }}" class="nav-link">
+                        <i class="fas fa-comment"></i>
+                        <span>Ulasan</span>
+                    </a>
                 </li>
                 <li class="menu-header">Pengaturan</li>
                 <li class="dropdown {{ $active === 'Profil' ? 'active' : '' }}">
@@ -105,16 +99,5 @@
                 </li>
             @endif
         </ul>
-        {{-- <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown">
-                <i class="fas fa-book"></i>
-                <span>Buku</span>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="nav-link" href="#">Buku</a>
-                </li>
-            </ul>
-        </li> --}}
     </aside>
 </div>
