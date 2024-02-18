@@ -9,7 +9,7 @@ class Buku extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'judul', 'slug', 'penulis', 'penerbit', 'tahun_terbit', 'deskripsi', 'gambar', 'stok', 'kategori_id'];
+    protected $fillable = ['id', 'judul', 'slug', 'penulis', 'penerbit', 'tahun_terbit', 'deskripsi', 'gambar', 'stok', 'stok_terkini', 'kategori_id'];
 
     protected $guarded = [];
 
@@ -35,5 +35,10 @@ class Buku extends Model
     public function koleksi()
     {
         return $this->hasMany(Koleksi::class, 'buku_id');
+    }
+
+    public function detailPinjam()
+    {
+        return $this->hasMany(DetailPinjam::class, 'buku_id');
     }
 }

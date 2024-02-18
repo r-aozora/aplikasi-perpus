@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label for="stok">Stok Buku</label>
-                                        <input type="number" id="stok" class="form-control" value="{{ $buku->stok }}" readonly>
+                                        <input type="number" id="stok" class="form-control" value="{{ $buku->stok_terkini }}" readonly>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label for="kategori">Kategori</label>
@@ -76,7 +76,7 @@
                                 <a href="{{ route('buku.edit', $buku->slug) }}" class="btn btn-warning">
                                     Edit Data
                                 </a>
-                                <a href="{{ route('user.destroy', $user->slug) }}" class="btn btn-danger" data-confirm-delete="true">
+                                <a href="{{ route('user.destroy', $buku->slug) }}" class="btn btn-danger" data-confirm-delete="true">
                                     Hapus Data
                                 </a>
                             </div>

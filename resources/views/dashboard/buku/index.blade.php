@@ -63,10 +63,10 @@
                                                     <td>{{ $item->penerbit }}</td>
                                                     <td>{{ $item->tahun_terbit }}</td>
                                                     <td>{{ $item->kategori->kategori }}</td>
-                                                    <td>{{ $item->stok }}</td>
+                                                    <td>{{ $item->stok_terkini }}</td>
                                                     <td>
-                                                        <div class="badge badge-{{ $item->stok === 0 ? 'danger' : 'success' }}">
-                                                            {{ $item->stok === 0 ? 'Kosong' : 'Tersedia' }}
+                                                        <div class="badge badge-{{ $item->stok_terkini === 0 ? 'danger' : 'success' }}">
+                                                            {{ $item->stok_terkini === 0 ? 'Kosong' : 'Tersedia' }}
                                                         </div>
                                                     </td>
                                                     <td>
