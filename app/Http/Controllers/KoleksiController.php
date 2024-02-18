@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Koleksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KoleksiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $user = $request->input('user');
+        $user = Auth::user()->id;
 
         $koleksi = Koleksi::with(['buku', 'buku.kategori'])
             ->where('user_id', $user)
@@ -23,8 +24,8 @@ class KoleksiController extends Controller
 
         return view('dashboard.koleksi.index')
             ->with([
-                'title' => 'Koleksi Buku Kamu',
-                'active' => 'Koleksi',
+                'title'   => 'Koleksi Buku Kamu',
+                'active'  => 'Koleksi',
                 'koleksi' => $koleksi
             ]);
     }

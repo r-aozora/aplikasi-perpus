@@ -8,6 +8,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
+                <div class="section-header-back">
+                    <a href="{{ route('pustaka.index') }}" class="btn btn-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
                 <h1>{{ $title }}</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active">
@@ -32,8 +37,8 @@
                                     <i class="fas fa-list"></i>
                                     Ulasan Buku
                                 </a>
-                                <div class="tickets">
-                                    <div class="ticket-items" id="ticket-items">
+                                <div class="tickets row">
+                                    <div class="col-12 col-lg-4 ticket-items" id="ticket-items">
                                         @foreach ($buku->ulasan as $item)
                                             <div class="ticket-item">
                                                 <div class="ticket-title">
@@ -49,7 +54,7 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <div class="ticket-content">
+                                    <div class="col-12 col-lg-8 ticket-content">
                                         <div class="ticket-header">
                                             <div class="ticket-detail">
                                                 <div class="ticket-title">
@@ -67,16 +72,16 @@
                                             </div>
                                         </div>
                                         <div class="ticket-description">
-                                            {{ $buku->deskripsi }}
-                                            <div class="gallery mt-2">
-                                                <div class="gallery-item" data-image="{{ asset($buku->gambar) }}" data-title="{{ $buku->judul }}"></div>
+                                            <div class="gallery gallery-fw" data-item-height="300">
+                                                <div class="gallery-item" data-image="{{ asset($buku->gambar) }}" data-title="{{ $item->judul }}"></div>
                                             </div>
+                                            {{ $buku->deskripsi }}
                                             <div class="ticket-divider"></div>
                                             <div class="ticket-form">
                                                 <div class="{{ $koleksi ? 'd-none' : '' }}">
                                                     <form action="{{ route('koleksi.store') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                                                         <input type="hidden" name="buku_id" value="{{ $buku->id }}">
                                                         <button type="submit" class="btn btn-lg btn-primary">
                                                             <i class="fas fa-star"></i>
@@ -87,6 +92,8 @@
                                                 <form action="{{ route('ulasan.store') }}" method="POST" novalidate>
                                                     @csrf
                                                     <div class="section-title">Tulis Ulasan dan Rating Kamu</div>
+                                                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                                                    <input type="hidden" name="buku_id" value="{{ $buku->id }}">
                                                     <div class="form-group">
                                                         <label for="rating">Rating</label>
                                                         <div class="selectgroup selectgroup-pills">
@@ -106,7 +113,7 @@
                                                         <textarea class="form-control" name="ulasan" id="ulasan" style="height: 150px" placeholder="Tulis ulasan kamu..." required>{{ old('ulasan') }}</textarea>
                                                     </div>
                                                     <div class="form-group text-right">
-                                                        <button class="btn btn-primary btn-lg">Upload</button>
+                                                        <button class="btn btn-primary btn-lg">Posting</button>
                                                     </div>
                                                 </form>
                                             </div>

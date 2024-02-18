@@ -47,7 +47,7 @@
                                         <div class="bullet"></div>
                                         <a href="#">{{ $item->stok }} tersisa</a>
                                         <div class="bullet"></div>
-                                        <a href="#">{{ number_format($item->ulasan_avg_rating, 1) }} / 5</a>
+                                        <a href="#">{{ number_format($item->ulasan_avg_rating, 1) }}<i class="fas fa-star"></i></a>
                                     </div>
                                     <div class="article-title">
                                         <h2><a href="{{ route('pustaka.show', $item->slug) }}">{{ $item->judul }}</a></h2>

@@ -9,7 +9,7 @@ class Ulasan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'user_id', 'buku_id', 'ulasan', 'rating'];
+    public $fillable = ['id', 'user_id', 'buku_id', 'ulasan', 'rating'];
 
     protected $guarded = [];
 
